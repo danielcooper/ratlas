@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "lib/ratlas/response.rb",
     "lib/ratlas/schedule.rb",
     "lib/ratlas/search.rb",
+    "ratlas.gemspec",
     "spec/container_spec.rb",
     "spec/fixtures/content.json",
     "spec/live_container_spec.rb",
