@@ -37,7 +37,7 @@ module Ratlas
     def to_uri
       uri = Addressable::URI.new
       uri.host = Ratlas::ENDPOINT
-      uri.path = Ratlas::ENDPOINT_VERSION + '/' + @target.resource_name
+      uri.path = Ratlas::ENDPOINT_VERSION + '/' + @target.resource_name + '.json'
       uri.query_values = conditions_for_query
       uri
     end
@@ -47,7 +47,7 @@ module Ratlas
     end
     
     def execute
-      Ratlas::Response.new(request)
+      Ratlas::Response.new(request, @target.resource_key)
     end
 
     protected

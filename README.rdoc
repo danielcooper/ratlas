@@ -1,6 +1,30 @@
 = ratlas
 
-Description goes here.
+Ratlas is a lightweight ruby library for consuming the lovely Atlas Api (http://docs.atlasapi.org/)
+
+== Installation
+
+  gem install ratlas
+  
+== API
+  
+Please see the atlas api documentation for a list of methods and their arguments.
+
+== Example
+
+  Ratlas::Discover.find(:all).where(:genre=> "drama", :media_type => 'video').each do |n|
+	  puts n.title
+  end
+  
+  Ratlas::Schedule.find(:all).where(:genre=> "drama", :media_type => 'video').each do |n|
+	  puts n.title
+  end
+  
+  #http://atlasapi.org/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk,itv.com
+  Ratlas::Schedule.find(:all).where(:from => Time.now.to_i, :to=> Time.now.to_i + 3600).and(:channel => 'bbcone', :publisher => 'bbc.co.uk').each do |n|
+	  puts "#{n.channel_title} has the following programs in the next hour:"
+	  n.items {|program| puts "-#{program.first.title}"}
+  end
 
 == Contributing to ratlas
  

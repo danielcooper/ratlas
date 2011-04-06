@@ -37,14 +37,14 @@ describe Ratlas::Search do
 end
 
 
-describe Ratlas::Content do
+describe Ratlas::Schedule do
   
   context "when used" do
     
     it "should be able to tell me about a url" do
       
-      Ratlas::Content.find(:uri => 'http://www.bbc.co.uk/programmes/b00zf9j6').each do |n|
-        n.title.class.should == String
+      Ratlas::Schedule.find(:all).where(:from => Time.now.to_i, :to=> Time.now.to_i + 3600).and(:channel => 'bbcone', :publisher => 'bbc.co.uk').each do |n|
+        n.items.class.should == Array
       end
     end
     
