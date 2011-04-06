@@ -1,32 +1,37 @@
 require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "ratlas"
-    gem.summary = %Q{A Atlas api Ruby client}
-    gem.description = %Q{Rutlas allows you to consume to the Atlas api without getting your hands dirty}
-    gem.email = "danie@14lines.com"
-    gem.homepage = "http://github.com/daniel_cooper/ratlas"
-    gem.authors = ["Daniel Cooper"]
-    gem.add_development_dependency "rspec"
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "ratlas"
+  gem.homepage = "http://github.com/daniel_cooper/ratlas"
+  gem.license = "MIT"
+  gem.summary = %Q{A Atlas api Ruby client}
+  gem.description = %Q{Rutlas allows you to consume to the Atlas api without getting your hands dirty}
+  gem.email = "daniel@14lines.com"
+  gem.authors = ["Daniel Cooper"]
+  # Include your dependencies below. Runtime dependencies are required when using your gem,
+  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
+  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
+  #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
+Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = ""
-  end
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "hashie #{version}"
+  rdoc.title = "ratlas #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
